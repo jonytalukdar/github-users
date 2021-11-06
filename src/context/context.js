@@ -6,11 +6,28 @@ import axios from 'axios';
 
 const rootUrl = 'https://api.github.com';
 
-export const GithubContext = createContext();
+export const GithubContext = createContext({
+  // for auto suggession
+  githubUser: {},
+  repos: [],
+  followers: [],
+});
 
 const GithubProvider = ({ children }) => {
+  const [githubUser, setGithubUser] = useState(mockUser);
+  const [repos, setRepos] = useState(mockRepos);
+  const [followers, setFollowers] = useState(mockFollowers);
+
+  const contextValue = {
+    githubUser,
+    repos,
+    followers,
+  };
+
   return (
-    <GithubContext.Provider value="hello">{children}</GithubContext.Provider>
+    <GithubContext.Provider value={contextValue}>
+      {children}
+    </GithubContext.Provider>
   );
 };
 
