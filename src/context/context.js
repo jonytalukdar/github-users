@@ -13,6 +13,7 @@ export const GithubContext = createContext({
   followers: [],
   requests: 0,
   error: {},
+  searchGithubUser: (user) => {},
 });
 
 const GithubProvider = ({ children }) => {
@@ -24,6 +25,24 @@ const GithubProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   // errors
   const [error, setError] = useState({ show: false, msg: '' });
+
+  // function for search github
+  const searchGithubUser = async (user) => {
+    // toggle error
+    toggleError();
+    setLoading(true);
+    const response = await axios(`${rootUrl}/users/${user}`).catch((err) =>
+      console.log(err)
+    );
+
+    if (response) {
+      setGithubUser(response.data);
+      setLoading(false);
+    } else {
+      toggleError(true, 'There is no use with that username');
+      setLoading(false);
+    }
+  };
 
   // check rate
   const checkRequests = () => {
@@ -54,6 +73,7 @@ const GithubProvider = ({ children }) => {
     followers,
     requests,
     error,
+    searchGithubUser,
   };
 
   return (

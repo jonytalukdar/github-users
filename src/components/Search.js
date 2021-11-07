@@ -4,7 +4,8 @@ import { MdSearch } from 'react-icons/md';
 import { GithubContext } from '../context/context';
 import { useState } from 'react/cjs/react.development';
 const Search = () => {
-  const { requests, error } = useContext(GithubContext);
+  const { requests, error, searchGithubUser } = useContext(GithubContext);
+
   const [user, setUser] = useState('');
 
   const submitHandler = (e) => {
@@ -14,6 +15,7 @@ const Search = () => {
       // doing some logic
       // optional
       // setUser('');
+      searchGithubUser(user);
     }
   };
 
