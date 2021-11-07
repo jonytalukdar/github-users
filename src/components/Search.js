@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { MdSearch } from 'react-icons/md';
 import { GithubContext } from '../context/context';
 import { useState } from 'react/cjs/react.development';
 const Search = () => {
+  const { requests } = useContext(GithubContext);
   const [user, setUser] = useState('');
 
   const submitHandler = (e) => {
@@ -11,8 +12,8 @@ const Search = () => {
 
     if (user) {
       // doing some logic
-      // option
-      setUser('');
+      // optional
+      // setUser('');
     }
   };
 
@@ -28,10 +29,10 @@ const Search = () => {
               value={user}
               onChange={(e) => setUser(e.target.value)}
             />
-            <button type="submit">search</button>
+            {requests > 0 && <button type="submit">search</button>}
           </div>
         </form>
-        <h3>Request 60 / 60</h3>
+        <h3>Request {requests} / 60</h3>
       </Wrapper>
     </section>
   );
