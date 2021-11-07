@@ -14,6 +14,7 @@ export const GithubContext = createContext({
   requests: 0,
   error: {},
   searchGithubUser: (user) => {},
+  isLoading: true,
 });
 
 const GithubProvider = ({ children }) => {
@@ -22,7 +23,7 @@ const GithubProvider = ({ children }) => {
   const [followers, setFollowers] = useState(mockFollowers);
   // requests , loading
   const [requests, setRequests] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   // errors
   const [error, setError] = useState({ show: false, msg: '' });
 
@@ -30,18 +31,20 @@ const GithubProvider = ({ children }) => {
   const searchGithubUser = async (user) => {
     // toggle error
     toggleError();
-    setLoading(true);
+    setIsLoading(true);
     const response = await axios(`${rootUrl}/users/${user}`).catch((err) =>
       console.log(err)
     );
 
     if (response) {
       setGithubUser(response.data);
-      setLoading(false);
+      setIsLoading(false);
     } else {
       toggleError(true, 'There is no use with that username');
-      setLoading(false);
+      setIsLoading(false);
     }
+
+    checkRequests();
   };
 
   // check rate
@@ -74,6 +77,7 @@ const GithubProvider = ({ children }) => {
     requests,
     error,
     searchGithubUser,
+    isLoading,
   };
 
   return (
