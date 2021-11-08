@@ -39,10 +39,10 @@ const GithubProvider = ({ children }) => {
     if (response) {
       setGithubUser(response.data);
 
-      const { login, followers_url } = response.data;
+      const { followers_url, repos_url } = response.data;
 
       //fetching for repos
-      axios(`${rootUrl}/users/${login}/repos?per_page=100`).then((response) =>
+      axios(`${repos_url}?per_page=100`).then((response) =>
         setRepos(response.data)
       );
 
