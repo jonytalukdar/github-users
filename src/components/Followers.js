@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { GithubContext } from '../context/context';
 import styled from 'styled-components';
 
 const Followers = () => {
-  const { followers } = useContext(GithubContext);
+  const { followers } = React.useContext(GithubContext);
 
   return (
     <Wrapper>
-      <div className="followers">
+      <div className='followers'>
         {followers.map((follower, index) => {
           const { avatar_url: img, html_url, login } = follower;
           return (

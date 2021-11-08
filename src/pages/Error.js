@@ -6,9 +6,9 @@ const Error = () => {
     <Wrapper>
       <div>
         <h1>404</h1>
-        <h3>Sorry, The page you tried cannot not be found</h3>
-        <Link to="/" className="btn">
-          Go Home
+        <h3>sorry, the page you tried cannot be found</h3>
+        <Link to='/' className='btn'>
+          back home
         </Link>
       </div>
     </Wrapper>

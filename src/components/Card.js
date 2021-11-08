@@ -1,11 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { GithubContext } from '../context/context';
 import styled from 'styled-components';
 import { MdBusiness, MdLocationOn, MdLink } from 'react-icons/md';
-
 const Card = () => {
-  const { githubUser } = useContext(GithubContext);
-
+  const { githubUser } = React.useContext(GithubContext);
   const {
     avatar_url,
     html_url,
@@ -16,35 +14,32 @@ const Card = () => {
     location,
     twitter_username,
   } = githubUser;
-
   return (
     <Wrapper>
       <header>
         <img src={avatar_url} alt={name} />
         <div>
           <h4>{name}</h4>
-          <p>@{twitter_username || 'john-doe'}</p>
+          <p>@{twitter_username || 'john doe'}</p>
         </div>
-        <a href={html_url} target="_blank" rel="noreferrer">
-          Follow
-        </a>
+        <a href={html_url}>follow</a>
       </header>
-      <p className="bio">{bio}</p>
-      <div className="links">
+      <p className='bio'>{bio}</p>
+      <div className='links'>
         <p>
-          <MdBusiness /> {company}
+          <MdBusiness></MdBusiness> {company}
         </p>
         <p>
-          <MdLocationOn /> {location || 'Earth'}
+          <MdLocationOn></MdLocationOn> {location || 'earth'}
         </p>
-        <a href={`https://${blog}`} target="_blank" rel="noreferrer">
-          <MdLink /> {blog}
+        <a href={`https://${blog}`}>
+          <MdLink></MdLink>
+          {blog}
         </a>
       </div>
     </Wrapper>
   );
 };
-
 const Wrapper = styled.article`
   background: var(--clr-white);
   padding: 1.5rem 2rem;
